@@ -15,13 +15,20 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
+-- Delete current buffer
+map({ "n" }, "<A-w>", "<cmd>bd<cr>")
+
+-- Nop out unused (by me) and often accidentally triggered keymap
 map({ "n" }, "<S-j>", "<Nop>")
-map({ "n" }, "<A-o>", "<cmd>ClangdSwitchSourceHeader<cr>")
-map({ "n" }, "<A-r>", "<cmd>Trouble lsp_references<cr>")
+
+-- Refresh UI if too many graphical glitches
 map({ "n" }, "<C-p>", "<cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><cr>")
 
+-- Quick toggle/removal of quickfix/Trouble
 map({ "n" }, "<A-F>", "<cmd>TroubleToggle<cr>")
 map({ "n" }, "<A-D>", "<cmd>cclose<cr>")
+
+-- Full root directory search for anything
 map({ "n" }, "<A-f>", function()
   vim.ui.input({ prompt = "Search: " }, function(search_term)
     if search_term ~= nil and search_term ~= "" then
@@ -32,19 +39,26 @@ map({ "n" }, "<A-f>", function()
   end)
 end)
 
+-- Generic LSP, always mapped
+map({ "n" }, "<A-r>", "<cmd>Trouble lsp_references<cr>")
 map({ "n" }, "<C-A-p>", function()
   vim.api.nvim_cmd({ cmd = "LspStop" }, {})
   vim.api.nvim_cmd({ cmd = "LspStart" }, {})
 end)
 
+-- CMake/C++
 local cmake_tools = require("cmake-tools")
-map({ "n" }, "<F1>", function()
-  cmake_tools.select_configure_preset(function()
-    cmake_tools.select_build_preset()
+if cmake_tools.is_cmake_project() then
+  map({ "n" }, "<F1>", function()
+    cmake_tools.select_configure_preset(function()
+      cmake_tools.select_build_preset()
+    end)
   end)
-end)
-map({ "n" }, "<F2>", function()
-  cmake_tools.generate({}, function() end)
-end)
-map({ "n" }, "<F6>", "<cmd>CMakeQuickBuild<cr>")
-map({ "n" }, "<A-w>", "<cmd>bd<cr>")
+  map({ "n" }, "<F4>", function()
+    cmake_tools.generate({}, function() end)
+  end)
+  map({ "n" }, "<F5>", "<cmd>CMakeBuild<cr>")
+  map({ "n" }, "<F6>", "<cmd>CMakeQuickBuild<cr>")
+
+  map({ "n" }, "<A-o>", "<cmd>ClangdSwitchSourceHeader<cr>")
+end
