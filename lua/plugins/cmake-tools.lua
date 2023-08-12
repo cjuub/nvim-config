@@ -1,4 +1,4 @@
-local function load_current_cmake_targets_to_dap()
+local function load_current_cmake_targets_to_dap(callback)
   local cmake_tools = require("cmake-tools")
   if cmake_tools.is_cmake_project() then
     cmake_tools.get_cmake_launch_targets(function(targets)
@@ -52,6 +52,10 @@ local function load_current_cmake_targets_to_dap()
       local dap = require("dap")
       dap.configurations.cpp = {}
       vim.list_extend(dap.configurations.cpp, target_configs)
+
+      if callback then
+        callback()
+      end
     end)
   end
 end
@@ -103,8 +107,10 @@ return {
         {
           "<F7>",
           function()
-            load_current_cmake_targets_to_dap()
-            require("dap").continue()
+            load_current_cmake_targets_to_dap(function()
+              vim.cmd("cclose")
+              require("dap").continue()
+            end)
           end,
           desc = "Debug (start/continue)",
         },
