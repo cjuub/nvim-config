@@ -45,18 +45,4 @@ map({ "n" }, "<C-A-p>", function()
   vim.api.nvim_cmd({ cmd = "LspStop" }, {})
   vim.api.nvim_cmd({ cmd = "LspStart" }, {})
 end)
-
--- CMake/C++
-local cmake_tools = require("cmake-tools")
-if cmake_tools.is_cmake_project() then
-  map({ "n" }, "<F1>", function()
-    cmake_tools.select_configure_preset()
-  end)
-  map({ "n" }, "<F4>", function()
-    cmake_tools.generate({}, function() end)
-  end)
-  map({ "n" }, "<F5>", "<cmd>CMakeBuild<cr>")
-  map({ "n" }, "<F6>", "<cmd>CMakeQuickBuild<cr>")
-
-  map({ "n" }, "<A-o>", "<cmd>ClangdSwitchSourceHeader<cr>")
-end
+map({ "n" }, "<A-o>", "<cmd>ClangdSwitchSourceHeader<cr>")
