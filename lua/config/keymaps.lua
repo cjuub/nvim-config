@@ -46,3 +46,6 @@ map({ "n" }, "<C-A-p>", function()
   vim.api.nvim_cmd({ cmd = "LspStart" }, {})
 end)
 map({ "n" }, "<A-o>", "<cmd>ClangdSwitchSourceHeader<cr>")
+
+-- Git neotree
+map({ "n" }, "<leader>gn", "<cmd>Neotree position=right git_status toggle<cr>")
