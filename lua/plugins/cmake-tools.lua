@@ -63,6 +63,16 @@ end
 return {
   {
     "Civitasv/cmake-tools.nvim",
+    init = function()
+      require("lspconfig").clangd.setup({
+        on_new_config = function(new_config, new_cwd)
+          local status, cmake = pcall(require, "cmake-tools")
+          if status then
+            cmake.clangd_on_new_config(new_config)
+          end
+        end,
+      })
+    end,
     keys = function()
       if not require("cmake-tools").is_cmake_project() then
         return {}
@@ -139,7 +149,7 @@ return {
     opts = {
       cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" },
       cmake_build_options = { "-j32" },
-      cmake_soft_link_compile_commands = true,
+      cmake_soft_link_compile_commands = false,
       cmake_dap_configuration = { -- debug settings for cmake
         name = "cpp",
         type = "cppdbg",
