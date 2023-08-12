@@ -15,39 +15,3 @@ vim.api.nvim_create_autocmd("BufReadPre", {
     end
   end,
 })
-
-vim.api.nvim_create_autocmd("BufReadPre", {
-  group = augroup("cmake_load_targets"),
-  callback = function()
-    if not vim.g.cmake_targets_loaded then
-      local cmake_tools = require("cmake-tools")
-      if cmake_tools.is_cmake_project() then
-        cmake_tools.get_cmake_launch_targets(function(targets)
-          local target_configs = {}
-          local build_type = tostring(cmake_tools.get_build_type().value)
-          for k, v in pairs(targets.data.targets) do
-            table.insert(target_configs, {
-              name = "(CMake) " .. v .. " (" .. build_type .. ")",
-              type = "cppdbg",
-              request = "launch",
-              args = "",
-              program = targets.data.abs_paths[k],
-              cwd = "${workspaceFolder}",
-              stopAtEntry = false,
-              setupCommands = {
-                {
-                  text = "-enable-pretty-printing",
-                  description = "enable pretty printing",
-                  ignoreFailures = false,
-                },
-              },
-            })
-          end
-
-          vim.g.cmake_target_configs = target_configs
-        end)
-      end
-      vim.g.cmake_targets_loaded = true
-    end
-  end,
-})
