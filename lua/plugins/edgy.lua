@@ -24,8 +24,16 @@ return {
           return not vim.b[buf].lazyterm_cmd
         end,
       },
-      "Trouble",
-      { ft = "qf", title = "QuickFix" },
+      {
+        ft = "Trouble",
+        title = "Trouble",
+        size = { height = 0.4 },
+      },
+      {
+        ft = "qf",
+        title = "QuickFix",
+        size = { height = 0.4 },
+      },
       {
         ft = "help",
         size = { height = 20 },
@@ -44,7 +52,8 @@ return {
         filter = function(buf)
           return vim.b[buf].neo_tree_source == "filesystem"
         end,
-        size = { width = 60, height = 0.5 },
+        pinned = true,
+        size = { width = 0.2, height = 0.5 },
       },
       {
         title = "Neo-Tree Git",

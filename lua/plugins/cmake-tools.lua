@@ -86,6 +86,7 @@ return {
         {
           "<F4>",
           function()
+            require("trouble").close()
             require("cmake-tools").generate({}, function() end)
           end,
           desc = "Run CMake",
@@ -93,6 +94,7 @@ return {
         {
           "<F5>",
           function()
+            require("trouble").close()
             require("cmake-tools").build({}, function() end)
           end,
           desc = "Build selected build target",
@@ -100,6 +102,7 @@ return {
         {
           "<F6>",
           function()
+            require("trouble").close()
             require("cmake-tools").quick_build({ fargs = {} }, function() end)
           end,
           desc = "Build from target selection",
@@ -107,6 +110,7 @@ return {
         {
           "<F7>",
           function()
+            require("trouble").close()
             load_current_cmake_targets_to_dap(function()
               vim.cmd("cclose")
               require("dap").continue()
@@ -143,6 +147,22 @@ return {
         stopOnEntry = false,
         runInTerminal = true,
         console = "integratedTerminal",
+      },
+      cmake_executor = {
+        name = "quickfix", -- name of the executor
+        opts = {}, -- the options the executor will get, possible values depend on the executor type. See `default_opts` for possible values.
+        default_opts = { -- a list of default and possible values for executors
+          quickfix = {
+            show = "always", -- "always", "only_on_error"
+            position = "belowright", -- "bottom", "top"
+            size = 20,
+          },
+        },
+      },
+      cmake_notifications = {
+        enabled = false, -- show cmake execution progress in nvim-notify
+        spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }, -- icons used for progress display
+        refresh_rate_ms = 100, -- how often to iterate icons
       },
     },
   },
