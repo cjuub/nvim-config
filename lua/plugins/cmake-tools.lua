@@ -1,65 +1,3 @@
-local function load_current_cmake_targets_to_dap(callback)
-  local cmake_tools = require("cmake-tools")
-  if cmake_tools.is_cmake_project() then
-    cmake_tools.get_cmake_launch_targets(function(targets)
-      local target_configs = {}
-      local build_type = tostring(cmake_tools.get_build_type().value)
-      local launch_target = cmake_tools.get_launch_target()
-
-      for k, v in pairs(targets.data.targets) do
-        if v == launch_target then
-          table.insert(target_configs, 1, {
-            name = "* " .. v .. " [" .. build_type .. "]",
-            type = "cppdbg",
-            request = "launch",
-            args = "",
-            program = targets.data.abs_paths[k],
-            cwd = "${workspaceFolder}",
-            stopAtEntry = false,
-            setupCommands = {
-              {
-                text = "-enable-pretty-printing",
-                description = "enable pretty printing",
-                ignoreFailures = false,
-              },
-            },
-          })
-
-          -- Add dummy separator between selected target and the rest
-          table.insert(target_configs, 2, {
-            name = "---",
-          })
-        end
-
-        table.insert(target_configs, {
-          name = v .. " [" .. build_type .. "]",
-          type = "cppdbg",
-          request = "launch",
-          args = "",
-          program = targets.data.abs_paths[k],
-          cwd = "${workspaceFolder}",
-          stopAtEntry = false,
-          setupCommands = {
-            {
-              text = "-enable-pretty-printing",
-              description = "enable pretty printing",
-              ignoreFailures = false,
-            },
-          },
-        })
-      end
-
-      local dap = require("dap")
-      dap.configurations.cpp = {}
-      vim.list_extend(dap.configurations.cpp, target_configs)
-
-      if callback then
-        callback()
-      end
-    end)
-  end
-end
-
 return {
   {
     "Civitasv/cmake-tools.nvim",
@@ -121,7 +59,7 @@ return {
           "<F7>",
           function()
             require("trouble").close()
-            load_current_cmake_targets_to_dap(function()
+            require("helpers.cmake-tools").load_current_cmake_targets_to_dap(function()
               vim.cmd("cclose")
               require("dap").continue()
             end)
