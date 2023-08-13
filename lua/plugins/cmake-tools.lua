@@ -19,67 +19,37 @@ return {
       return {
         {
           "<F1>",
-          function()
-            require("cmake-tools").select_configure_preset()
-          end,
-          desc = "Select CMakePreset",
+          require("helpers.cmake-tools").select_presets,
+          desc = "Select CMakePresets",
         },
         {
           "<F2>",
-          function()
-            require("cmake-tools").select_launch_target({}, {})
-          end,
-          desc = "Select CMakePreset",
+          require("helpers.cmake-tools").select_build_target,
+          desc = "Select launch target",
+        },
+        {
+          "<F3>",
+          require("helpers.cmake-tools").select_launch_target,
+          desc = "Select launch target",
         },
         {
           "<F4>",
-          function()
-            require("trouble").close()
-            require("cmake-tools").generate({}, function() end)
-          end,
+          require("helpers.cmake-tools").configure,
           desc = "Run CMake",
         },
         {
           "<F5>",
-          function()
-            require("trouble").close()
-            require("cmake-tools").build({}, function() end)
-          end,
+          require("helpers.cmake-tools").build,
           desc = "Build selected build target",
         },
         {
-          "<F6>",
-          function()
-            require("trouble").close()
-            require("cmake-tools").quick_build({ fargs = {} }, function() end)
-          end,
-          desc = "Build from target selection",
-        },
-        {
-          "<F7>",
-          function()
-            require("trouble").close()
-            require("helpers.cmake-tools").load_current_cmake_targets_to_dap(function()
-              vim.cmd("cclose")
-              require("dap").continue()
-            end)
-          end,
+          "<F9>",
+          require("helpers.cmake-tools").debug,
           desc = "Debug (start/continue)",
         },
         {
-          "<F8>",
-          function()
-            require("dap").run_last()
-          end,
-          desc = "Debug (restart)",
-        },
-        {
           "<F12>",
-          function()
-            require("dap").terminate()
-            require("dapui").close()
-            vim.cmd("Neotree show")
-          end,
+          require("helpers.cmake-tools").close_debug_session,
           desc = "Debug (stop)",
         },
       }

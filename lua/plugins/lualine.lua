@@ -191,7 +191,7 @@ return {
         lualine_z = {
           {
             function()
-              return vscode_icons.ui.Configure
+              return " " .. vscode_icons.ui.Configure .. " "
             end,
             padding = { left = 1, right = 0 },
             separator = "",
@@ -199,7 +199,7 @@ return {
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
-                  vim.cmd("CMakeGenerate")
+                  require("helpers.cmake-tools").configure()
                 end
               end
             end,
@@ -215,14 +215,14 @@ return {
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
-                  vim.cmd("CMakeSelectConfigurePreset")
+                  require("helpers.cmake-tools").select_configure_preset()
                 end
               end
             end,
           },
           {
             function()
-              return vscode_icons.ui.Gear
+              return " " .. vscode_icons.ui.Gear .. " "
             end,
             padding = { left = 1, right = 0 },
             separator = "",
@@ -231,7 +231,7 @@ return {
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
-                  vim.cmd("CMakeBuild")
+                  require("helpers.cmake-tools").build()
                 end
               end
             end,
@@ -248,7 +248,7 @@ return {
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
-                  vim.cmd("CMakeSelectBuildPreset")
+                  require("helpers.cmake-tools").select_build_preset()
                 end
               end
             end,
@@ -262,26 +262,52 @@ return {
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
-                  vim.cmd("CMakeSelectBuildTarget")
+                  require("helpers.cmake-tools").select_build_target()
                 end
               end
             end,
           },
           {
             function()
-              return vscode_icons.ui.Bug
+              return " " .. vscode_icons.ui.Run .. " "
             end,
             padding = { left = 1, right = 0 },
+            separator = "|",
+            cond = require("cmake-tools").is_cmake_project,
+            on_click = function(n, mouse)
+              if n == 1 then
+                if mouse == "l" then
+                  require("helpers.cmake-tools").debug()
+                end
+              end
+            end,
+          },
+          {
+            function()
+              return " " .. vscode_icons.ui.Bug .. " "
+            end,
+            padding = { left = 0, right = 0 },
+            separator = "|",
+            cond = require("cmake-tools").is_cmake_project,
+            on_click = function(n, mouse)
+              if n == 1 then
+                if mouse == "l" then
+                  require("helpers.cmake-tools").debug()
+                end
+              end
+            end,
+          },
+          {
+            function()
+              return " " .. vscode_icons.ui.Close .. " "
+            end,
+            padding = { left = 0, right = 0 },
             separator = "",
             cond = require("cmake-tools").is_cmake_project,
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
-                  require("trouble").close()
-                  require("helpers.cmake-tools").load_current_cmake_targets_to_dap(function(launch_target_config)
-                    vim.cmd("cclose")
-                    require("dap").run(launch_target_config)
-                  end)
+                  require("helpers.cmake-tools").close_debug_session()
                 end
               end
             end,
@@ -295,7 +321,7 @@ return {
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
-                  vim.cmd("CMakeSelectLaunchTarget")
+                  require("helpers.cmake-tools").select_launch_target()
                 end
               end
             end,
