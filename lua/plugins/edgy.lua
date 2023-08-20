@@ -76,5 +76,8 @@ return {
       -- any other neo-tree windows
       "neo-tree",
     },
+    animate = {
+      enabled = false,
+    },
   },
 }

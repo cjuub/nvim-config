@@ -29,7 +29,7 @@ map({ "n" }, "<A-F>", "<cmd>TroubleToggle<cr>")
 map({ "n" }, "<A-D>", "<cmd>cclose<cr>")
 
 -- Full root directory search for anything
-map({ "n" }, "<A-f>", function()
+map({ "n" }, "<C-A-f>", function()
   vim.ui.input({ prompt = "Search: " }, function(search_term)
     if search_term ~= nil and search_term ~= "" then
       vim.api.nvim_cmd({ cmd = "grep", args = { search_term } }, {})
@@ -37,6 +37,26 @@ map({ "n" }, "<A-f>", function()
       vim.api.nvim_cmd({ cmd = "NoiceDismiss" }, {})
     end
   end)
+end)
+
+map({ "n" }, "<A-f>", function()
+  local search_term = vim.fn.expand("<cword>")
+  if search_term ~= nil and search_term ~= "" then
+    vim.cmd("grep! " .. search_term)
+    vim.api.nvim_cmd({ cmd = "Trouble", args = { "quickfix" } }, {})
+    vim.api.nvim_cmd({ cmd = "NoiceDismiss" }, {})
+
+    -- Hack to attach all found files to LSP,
+    -- fixes "find references" in some cases.
+    local clangd_client = vim.lsp.get_active_clients({ name = "clangd" })[1]
+    if clangd_client ~= nil then
+      local items = vim.fn.getqflist({ all = 1 }).items
+      for _, d in pairs(items) do
+        vim.fn.bufload(d.bufnr)
+        vim.lsp.buf_attach_client(d.bufnr, clangd_client.id)
+      end
+    end
+  end
 end)
 
 -- Generic LSP, always mapped
