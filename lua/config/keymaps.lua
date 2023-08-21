@@ -61,20 +61,6 @@ end)
 
 -- Generic LSP, always mapped
 map({ "n" }, "<A-r>", "<cmd>Trouble lsp_references<cr>")
-map({ "n" }, "<C-A-p>", function()
-  vim.api.nvim_cmd({ cmd = "LspStop" }, {})
-  vim.api.nvim_cmd({ cmd = "LspStart" }, {})
-end)
-map({ "n" }, "<A-o>", "<cmd>ClangdSwitchSourceHeader<cr>")
-map({ "n" }, "<A-enter>", function()
-  vim.lsp.buf.code_action()
-end)
-map({ "n" }, "<A-backspace>", function()
-  vim.lsp.buf.hover()
-end)
-map({ "n" }, "<A-d>", function()
-  vim.diagnostic.open_float()
-end)
 
 -- Git neotree
 map({ "n" }, "<leader>gn", "<cmd>Neotree position=right git_status toggle<cr>")
