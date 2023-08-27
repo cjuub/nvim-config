@@ -5,17 +5,3 @@
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
-
-vim.api.nvim_create_autocmd("BufReadPre", {
-  group = augroup("cmake_auto_configure"),
-  callback = function()
-    if not vim.g.cmake_auto_configured then
-      if require("cmake-tools").is_cmake_project() then
-        require("cmake-tools").generate({}, function()
-          vim.cmd("cclose")
-        end)
-        vim.g.cmake_auto_configured = true
-      end
-    end
-  end,
-})

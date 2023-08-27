@@ -2,10 +2,9 @@ return {
   {
     "Civitasv/cmake-tools.nvim",
     keys = function()
-      if not require("cmake-tools").is_cmake_project() then
-        return {}
+      if not require("helpers.cmake-tools").is_cmake_project() then
+        return false
       end
-
       return {
         {
           "<F1>",

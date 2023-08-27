@@ -195,7 +195,7 @@ return {
             end,
             padding = { left = 1, right = 0 },
             separator = "",
-            cond = require("cmake-tools").is_cmake_project,
+            cond = require("helpers.cmake-tools").is_cmake_project,
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
@@ -210,7 +210,7 @@ return {
               return "[" .. (c_preset and c_preset or "X") .. "]"
             end,
             cond = function()
-              return require("cmake-tools").is_cmake_project() and require("cmake-tools").has_cmake_preset()
+              return require("helpers.cmake-tools").is_cmake_project() and require("cmake-tools").has_cmake_preset()
             end,
             on_click = function(n, mouse)
               if n == 1 then
@@ -227,7 +227,7 @@ return {
             padding = { left = 1, right = 0 },
             separator = "",
             -- icon = vscode_icons.ui.Gear,
-            cond = require("cmake-tools").is_cmake_project,
+            cond = require("helpers.cmake-tools").is_cmake_project,
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
@@ -243,7 +243,7 @@ return {
             end,
             separator = "",
             cond = function()
-              return require("cmake-tools").is_cmake_project() and require("cmake-tools").has_cmake_preset()
+              return require("helpers.cmake-tools").is_cmake_project() and require("cmake-tools").has_cmake_preset()
             end,
             on_click = function(n, mouse)
               if n == 1 then
@@ -258,7 +258,7 @@ return {
               local b_target = require("cmake-tools").get_build_target()
               return "[" .. (b_target and b_target or "X") .. "]"
             end,
-            cond = require("cmake-tools").is_cmake_project,
+            cond = require("helpers.cmake-tools").is_cmake_project,
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
@@ -273,7 +273,7 @@ return {
             end,
             padding = { left = 1, right = 0 },
             separator = "|",
-            cond = require("cmake-tools").is_cmake_project,
+            cond = require("helpers.cmake-tools").is_cmake_project,
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
@@ -288,7 +288,7 @@ return {
             end,
             padding = { left = 0, right = 0 },
             separator = "|",
-            cond = require("cmake-tools").is_cmake_project,
+            cond = require("helpers.cmake-tools").is_cmake_project,
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
@@ -303,7 +303,7 @@ return {
             end,
             padding = { left = 0, right = 0 },
             separator = "",
-            cond = require("cmake-tools").is_cmake_project,
+            cond = require("helpers.cmake-tools").is_cmake_project,
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
@@ -317,7 +317,7 @@ return {
               local l_target = require("cmake-tools").get_launch_target()
               return "[" .. (l_target and l_target or "X") .. "]"
             end,
-            cond = require("cmake-tools").is_cmake_project,
+            cond = require("helpers.cmake-tools").is_cmake_project,
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then

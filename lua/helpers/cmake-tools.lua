@@ -57,13 +57,20 @@ local function load_current_cmake_targets_to_dap(callback)
 end
 
 return {
+  is_cmake_project = function()
+    local Path = require("plenary.path")
+    local cmakelists = Path:new(vim.loop.cwd(), "CMakeLists.txt")
+    if cmakelists:is_file() then
+      return true
+    end
+  end,
   configure = function()
     require("trouble").close()
     require("cmake-tools").generate({}, function() end)
   end,
   build = function()
     require("trouble").close()
-    require("cmake-tools").quick_build({ fargs = {require("cmake-tools").get_build_target()} })
+    require("cmake-tools").quick_build({ fargs = { require("cmake-tools").get_build_target() } })
   end,
   debug = function()
     require("trouble").close()
