@@ -18,25 +18,28 @@ return {
               vim.api.nvim_cmd({ cmd = "LspStop" }, {})
               vim.api.nvim_cmd({ cmd = "LspStart" }, {})
             end,
-            desc = "Switch Source/Header (C/C++)",
+            desc = "Restart LSP",
           },
           {
             "<A-enter>",
             function()
               vim.lsp.buf.code_action()
             end,
+            desc = "Code action",
           },
           {
             "<A-backspace>",
             function()
               vim.lsp.buf.hover()
             end,
+            desc = "Show symbol information",
           },
           {
             "<A-d>",
             function()
               vim.diagnostic.open_float()
             end,
+            desc = "Show diagnostic information",
           },
         },
         cmd = {
