@@ -1,6 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
   opts = {
+    autoformat = false,
     servers = {
       clangd = {
         on_new_config = function(new_config, new_cwd)
