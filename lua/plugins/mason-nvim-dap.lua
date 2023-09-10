@@ -1,7 +1,11 @@
 return {
   {
     "jay-babu/mason-nvim-dap.nvim",
+    lazy = false,
     opts = {
+      ensure_installed = {
+        "debugpy",
+      },
       handlers = {
         function(config)
           -- all sources with no handler get passed here
