@@ -85,11 +85,6 @@ return {
       require("dap").run(launch_target_config)
     end)
   end,
-  close_debug_session = function()
-    require("dap").terminate()
-    require("dapui").close()
-    vim.cmd("Neotree show")
-  end,
   select_build_target = function()
     require("cmake-tools").select_build_target({}, {})
   end,

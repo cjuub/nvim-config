@@ -307,7 +307,7 @@ return {
             on_click = function(n, mouse)
               if n == 1 then
                 if mouse == "l" then
-                  require("helpers.cmake-tools").close_debug_session()
+                  require("helpers.dap").close_debug_session()
                 end
               end
             end,

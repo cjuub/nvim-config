@@ -3,6 +3,39 @@ return {
   opts = {
     autoformat = false,
     servers = {
+      pyright = {
+        keys = {
+          {
+            "<C-A-p>",
+            function()
+              vim.api.nvim_cmd({ cmd = "LspStop" }, {})
+              vim.api.nvim_cmd({ cmd = "LspStart" }, {})
+            end,
+            desc = "Restart LSP",
+          },
+          {
+            "<A-backspace>",
+            function()
+              vim.lsp.buf.code_action()
+            end,
+            desc = "Code action",
+          },
+          {
+            "<A-i>",
+            function()
+              vim.lsp.buf.hover()
+            end,
+            desc = "Show symbol information",
+          },
+          {
+            "<A-d>",
+            function()
+              vim.diagnostic.open_float()
+            end,
+            desc = "Show diagnostic information",
+          },
+        },
+      },
       clangd = {
         on_new_config = function(new_config, new_cwd)
           local status, cmake = pcall(require, "cmake-tools")
@@ -22,14 +55,14 @@ return {
             desc = "Restart LSP",
           },
           {
-            "<A-enter>",
+            "<A-backspace>",
             function()
               vim.lsp.buf.code_action()
             end,
             desc = "Code action",
           },
           {
-            "<A-backspace>",
+            "<A-i>",
             function()
               vim.lsp.buf.hover()
             end,
@@ -46,6 +79,7 @@ return {
         cmd = {
           "clangd",
           "--background-index",
+          "--background-index-priority=normal",
           "--clang-tidy",
           "--header-insertion=iwyu",
           "--completion-style=detailed",

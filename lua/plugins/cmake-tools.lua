@@ -38,7 +38,7 @@ return {
         },
         {
           "<F12>",
-          require("helpers.cmake-tools").close_debug_session,
+          require("helpers.dap").close_debug_session,
           desc = "Debug (stop)",
         },
       }
