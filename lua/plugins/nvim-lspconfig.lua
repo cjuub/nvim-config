@@ -22,7 +22,7 @@ return {
             desc = "Restart LSP",
           },
           {
-            "<A-enter>",
+            "<A-p>",
             function()
               vim.lsp.buf.code_action()
             end,
@@ -46,12 +46,14 @@ return {
         cmd = {
           "clangd",
           "--background-index",
+          "--background-index-priority=normal",
           "--clang-tidy",
           "--header-insertion=iwyu",
           "--completion-style=detailed",
           "--function-arg-placeholders",
           "--fallback-style=llvm",
           "--query-driver=**",
+          "-j", "24",
         },
       },
     },
