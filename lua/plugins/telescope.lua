@@ -1,3 +1,5 @@
+local Util = require("lazyvim.util")
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -8,10 +10,17 @@ return {
         require("telescope.builtin").git_bcommits,
         desc = "Commits (current file)",
       },
+      { "<leader>/", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
+      { "<leader><space>", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
       {
         "<leader>fa",
         function()
-          require("telescope.builtin").find_files({ no_ignore = true, hidden = true })
+          require("telescope.builtin").find_files({
+            cwd = false,
+            no_ignore = true,
+            no_ignore_parent = true,
+            hidden = true,
+          })
         end,
         desc = "Find Files (all)",
       },
