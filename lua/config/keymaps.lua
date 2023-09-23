@@ -1,6 +1,8 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+local Util = require("lazyvim.util")
+
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
   ---@cast keys LazyKeysHandler
@@ -14,6 +16,10 @@ local function map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
+
+-- Remaps from LazyVim defaults
+map("n", "<c-/>", function() Util.float_term() end, { desc = "Terminal (cwd)" })
+map("n", "<c-_>", function() Util.float_term() end, { desc = "which_key_ignore" })
 
 -- Delete current buffer
 map({ "n" }, "<A-w>", "<cmd>bd<cr>")
