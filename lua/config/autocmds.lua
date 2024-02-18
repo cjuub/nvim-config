@@ -23,3 +23,17 @@ vim.api.nvim_create_autocmd({ "BufLeave" }, {
   command = "silent! wall",
   nested = true,
 })
+
+vim.api.nvim_create_autocmd("BufRead", {
+  pattern = "*",
+  callback = function()
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+      local buf_name = vim.api.nvim_buf_get_name(buf)
+      local startindex, _ = string.find(buf_name, "*cmake-tools*", 1, true)
+      if startindex ~= nil then
+        vim.api.nvim_buf_set_option(buf, "buflisted", false)
+      end
+    end
+  end,
+  once = true,
+})
