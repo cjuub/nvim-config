@@ -63,6 +63,7 @@ return {
             show = "always", -- "always", "only_on_error"
             position = "belowright", -- "bottom", "top"
             size = 20,
+            auto_close_when_success = false,
           },
         },
       },
