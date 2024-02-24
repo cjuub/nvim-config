@@ -21,6 +21,11 @@ end
 map({ "n" }, "<leader>ft", "")
 map({ "n" }, "<leader>fT", "")
 map({ "n" }, "<leader>fn", "")
+map({ "n" }, "<leader>`", "")
+map({ "n" }, "<leader>-", "")
+map({ "n" }, "<leader>|", "")
+map({ "n" }, "<leader>K", "")
+map({ "n" }, "<leader>L", "")
 
 -- Remaps from LazyVim defaults
 map("n", "<c-/>", function()
