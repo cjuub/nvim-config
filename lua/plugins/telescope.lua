@@ -5,13 +5,35 @@ return {
     "nvim-telescope/telescope.nvim",
     defaults = {},
     keys = {
+      { "<leader>fb", false },
+      { "<leader>fc", false },
+      { "<leader>ff", false },
+      { "<leader>fF", false },
+      { "<leader>fg", false },
+      { "<leader>fr", false },
+      { "<leader>fR", false },
       {
         "<leader>gb",
         require("telescope.builtin").git_bcommits,
         desc = "Commits (current file)",
       },
-      { "<leader>/", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
-      { "<leader><space>", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+      { "<leader>/", Util.telescope("live_grep", { cwd = vim.fn.getcwd() }), desc = "Grep (cwd)" },
+      {
+        "<leader><space>",
+        function()
+          require("telescope.builtin").find_files({
+            cwd = vim.fn.getcwd(),
+          })
+        end,
+        desc = "Find Files",
+      },
+      {
+        "<leader>r",
+        function()
+          require("telescope.builtin").resume({})
+        end,
+        desc = "Resume Search",
+      },
       {
         "<leader>fc",
         function()
@@ -22,27 +44,39 @@ return {
               "--color",
               "never",
               "--glob",
-              "*.py",
-              "--glob",
               "*.cpp",
               "--glob",
               "*.h",
               "--glob",
               "*.hpp",
             },
-            cwd = false,
-            no_ignore = false,
-            no_ignore_parent = false,
-            hidden = false,
+            cwd = vim.fn.getcwd(),
           })
         end,
-        desc = "Find Files (code)",
+        desc = "Find Source Files (C++)",
+      },
+      {
+        "<leader>fp",
+        function()
+          require("telescope.builtin").find_files({
+            find_command = {
+              "rg",
+              "--files",
+              "--color",
+              "never",
+              "--glob",
+              "*.py",
+            },
+            cwd = vim.fn.getcwd(),
+          })
+        end,
+        desc = "Find Source Files (Python)",
       },
       {
         "<leader>fa",
         function()
           require("telescope.builtin").find_files({
-            cwd = false,
+            cwd = vim.fn.getcwd(),
             no_ignore = true,
             no_ignore_parent = true,
             hidden = true,

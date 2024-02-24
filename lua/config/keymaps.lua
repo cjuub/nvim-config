@@ -17,9 +17,18 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
+-- unmap unused defaults
+map({ "n" }, "<leader>ft", "")
+map({ "n" }, "<leader>fT", "")
+map({ "n" }, "<leader>fn", "")
+
 -- Remaps from LazyVim defaults
-map("n", "<c-/>", function() Util.float_term() end, { desc = "Terminal (cwd)" })
-map("n", "<c-_>", function() Util.float_term() end, { desc = "which_key_ignore" })
+map("n", "<c-/>", function()
+  Util.float_term()
+end, { desc = "Terminal (cwd)" })
+map("n", "<c-_>", function()
+  Util.float_term()
+end, { desc = "which_key_ignore" })
 
 -- Delete current buffer
 map({ "n" }, "<A-w>", "<cmd>bd<cr>")
