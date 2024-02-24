@@ -2,7 +2,15 @@ return {
   "neovim/nvim-lspconfig",
   opts = {
     servers = {
+      ruff_lsp = {
+        root_dir = function()
+          return vim.fn.getcwd()
+        end,
+      },
       pyright = {
+        root_dir = function()
+          return vim.fn.getcwd()
+        end,
         keys = {
           {
             "<C-A-p>",
