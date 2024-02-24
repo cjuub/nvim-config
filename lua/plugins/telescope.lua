@@ -13,6 +13,32 @@ return {
       { "<leader>/", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
       { "<leader><space>", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
       {
+        "<leader>fc",
+        function()
+          require("telescope.builtin").find_files({
+            find_command = {
+              "rg",
+              "--files",
+              "--color",
+              "never",
+              "--glob",
+              "*.py",
+              "--glob",
+              "*.cpp",
+              "--glob",
+              "*.h",
+              "--glob",
+              "*.hpp",
+            },
+            cwd = false,
+            no_ignore = false,
+            no_ignore_parent = false,
+            hidden = false,
+          })
+        end,
+        desc = "Find Files (code)",
+      },
+      {
         "<leader>fa",
         function()
           require("telescope.builtin").find_files({
