@@ -76,6 +76,18 @@ map({ "n" }, "<A-f>", function()
         vim.lsp.buf_attach_client(d.bufnr, clangd_client.id)
       end
     end
+
+    -- Hack to attach first found file to pyright LSP
+    -- fixes auto import suggestion in some cases
+    local pyright_client = vim.lsp.get_active_clients({ name = "pyright" })[1]
+    if pyright_client ~= nil then
+      local items = vim.fn.getqflist({ all = 1 }).items
+      for _, d in pairs(items) do
+        vim.fn.bufload(d.bufnr)
+        vim.lsp.buf_attach_client(d.bufnr, pyright_client.id)
+        break
+      end
+    end
   end
 end)
 
