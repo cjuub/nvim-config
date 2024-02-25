@@ -328,7 +328,6 @@ return {
           },
         },
       },
-      extensions = { "neo-tree", "lazy" },
     }
   end,
 }
