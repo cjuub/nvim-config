@@ -57,6 +57,16 @@ return {
         desc = "Find Source Files (C++)",
       },
       {
+        "<leader>fC",
+        function()
+          require("telescope.builtin").live_grep({
+            glob_pattern = { "*.cpp", "*.h", "*.hpp" },
+            cwd = vim.fn.getcwd(),
+          })
+        end,
+        desc = "Find in Source Files (C++)",
+      },
+      {
         "<leader>fp",
         function()
           require("telescope.builtin").find_files({
@@ -74,6 +84,16 @@ return {
         desc = "Find Source Files (Python)",
       },
       {
+        "<leader>fP",
+        function()
+          require("telescope.builtin").live_grep({
+            glob_pattern = { "*.py" },
+            cwd = vim.fn.getcwd(),
+          })
+        end,
+        desc = "Find in Source Files (Python)",
+      },
+      {
         "<leader>fa",
         function()
           require("telescope.builtin").find_files({
@@ -84,6 +104,25 @@ return {
           })
         end,
         desc = "Find Files (all)",
+      },
+      {
+        "<leader>fA",
+        function()
+          require("telescope.builtin").live_grep({
+            vimgrep_arguments = {
+              "rg",
+              "--color=never",
+              "--no-heading",
+              "--with-filename",
+              "--line-number",
+              "--column",
+              "--smart-case",
+              "--unrestricted",
+            },
+            cwd = vim.fn.getcwd(),
+          })
+        end,
+        desc = "Find in Files (all)",
       },
     },
     opts = {
