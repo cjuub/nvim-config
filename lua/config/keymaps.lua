@@ -94,6 +94,5 @@ end)
 -- Generic LSP, always mapped
 map({ "n" }, "<A-r>", "<cmd>Trouble lsp_references<cr>")
 
--- Git neotree
-map({ "n" }, "<leader>gn", "<cmd>Neotree position=right git_status toggle<cr>")
+-- nvim-tree
 map({ "n" }, "<C-E>", "<cmd>NvimTreeToggle<cr>")

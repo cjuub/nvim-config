@@ -37,7 +37,6 @@ return {
 
     dapui.setup(opts)
     dap.listeners.after.event_initialized["dapui_config"] = function()
-      vim.cmd("Neotree close")
       dapui.open({})
     end
   end,
