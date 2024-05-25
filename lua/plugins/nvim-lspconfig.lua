@@ -8,6 +8,11 @@ return {
         end,
       },
       basedpyright = {
+        settings = {
+          basedpyright = {
+            typeCheckingMode = "basic",
+          },
+        },
         root_dir = function()
           return vim.fn.getcwd()
         end,
