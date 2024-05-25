@@ -7,12 +7,7 @@ return {
           return vim.fn.getcwd()
         end,
       },
-      basedpyright = {
-        settings = {
-          basedpyright = {
-            typeCheckingMode = "basic",
-          },
-        },
+      pyright = {
         root_dir = function()
           return vim.fn.getcwd()
         end,
