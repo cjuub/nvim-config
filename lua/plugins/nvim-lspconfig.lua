@@ -2,7 +2,7 @@ return {
   "neovim/nvim-lspconfig",
   opts = {
     servers = {
-      ruff_lsp = {
+      ruff = {
         root_dir = function()
           return vim.fn.getcwd()
         end,
