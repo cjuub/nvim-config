@@ -7,7 +7,7 @@ return {
           return vim.fn.getcwd()
         end,
       },
-      pyright = {
+      basedpyright = {
         root_dir = function()
           return vim.fn.getcwd()
         end,
@@ -15,8 +15,7 @@ return {
           {
             "<C-A-p>",
             function()
-              vim.api.nvim_cmd({ cmd = "LspStop" }, {})
-              vim.api.nvim_cmd({ cmd = "LspStart" }, {})
+              vim.api.nvim_cmd({ cmd = "LspRestart" }, {})
             end,
             desc = "Restart LSP",
           },
