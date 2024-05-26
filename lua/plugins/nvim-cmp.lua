@@ -19,6 +19,9 @@ return {
       vim.b.copilot_suggestion_hidden = false
     end)
 
+    -- Remove default sources (I never use them). LSPs will add themselves as sources.
+    cmp.sources = {}
+
     opts.completion = {
       autocomplete = false,
       completeopt = "menu,menuone,noinsert",
