@@ -10,8 +10,23 @@ return {
 
     local cmp = require("cmp")
 
+    -- Hide copilot suggestions when the completion menu is open
+    cmp.event:on("menu_opened", function()
+      vim.b.copilot_suggestion_hidden = true
+    end)
+
+    cmp.event:on("menu_closed", function()
+      vim.b.copilot_suggestion_hidden = false
+    end)
+
+    opts.completion = {
+      autocomplete = false,
+      completeopt = "menu,menuone,noinsert",
+    }
+
     opts.mapping = vim.tbl_extend("force", opts.mapping, {
       ["<Tab>"] = cmp.mapping(function(fallback)
+        require("copilot.suggestion").dismiss()
         if cmp.visible() then
           -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
           cmp.select_next_item()
