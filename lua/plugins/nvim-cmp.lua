@@ -19,8 +19,16 @@ return {
       vim.b.copilot_suggestion_hidden = false
     end)
 
-    -- Remove default sources (I never use them). LSPs will add themselves as sources.
-    cmp.sources = {}
+    -- Only get suggestions from LSP servers
+    -- Also, don't show text suggestions
+    opts.sources = {
+      {
+        name = "nvim_lsp",
+        entry_filter = function(entry)
+          return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
+        end,
+      },
+    }
 
     opts.completion = {
       autocomplete = false,
