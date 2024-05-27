@@ -1,6 +1,7 @@
 return {
   {
     "Civitasv/cmake-tools.nvim",
+    commit = "015be0ebb0f16fec7ee58386992083ce33e7af82",
     keys = function()
       if not require("helpers.cmake-tools").is_cmake_project() then
         return false
