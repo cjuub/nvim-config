@@ -25,11 +25,6 @@ return {
         end,
       },
       {
-        ft = "Trouble",
-        title = "Trouble",
-        size = { height = 0.4 },
-      },
-      {
         ft = "qf",
         title = "QuickFix",
         size = { height = 0.4 },

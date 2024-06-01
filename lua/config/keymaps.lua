@@ -56,7 +56,7 @@ local function toggle_quickfix()
 end
 
 -- Quick toggle/removal of quickfix/Trouble
-map({ "n" }, "<A-F>", "<cmd>TroubleToggle<cr>")
+map({ "n" }, "<A-F>", "<cmd>Trouble close<cr>")
 map({ "n" }, "<A-D>", toggle_quickfix)
 
 -- Full root directory search for anything
@@ -103,7 +103,10 @@ map({ "n" }, "<A-f>", function()
 end)
 
 -- Generic LSP, always mapped
-map({ "n" }, "<A-r>", "<cmd>Trouble lsp_references<cr>")
+map({ "n" }, "<A-r>", function()
+  vim.api.nvim_cmd({ cmd = "Trouble", args = { "lsp_references", "open" } }, {})
+  vim.api.nvim_cmd({ cmd = "Trouble", args = { "lsp_references", "refresh" } }, {})
+end)
 
 -- nvim-tree
 map({ "n" }, "<C-E>", "<cmd>NvimTreeToggle<cr>")
