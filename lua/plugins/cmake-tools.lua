@@ -1,7 +1,6 @@
 return {
   {
     "Civitasv/cmake-tools.nvim",
-    commit = "015be0ebb0f16fec7ee58386992083ce33e7af82",
     keys = function()
       if not require("helpers.cmake-tools").is_cmake_project() then
         return false
@@ -15,7 +14,7 @@ return {
         {
           "<F2>",
           require("helpers.cmake-tools").select_build_target,
-          desc = "Select launch target",
+          desc = "Select build target",
         },
         {
           "<F3>",
@@ -45,9 +44,9 @@ return {
       }
     end,
     opts = {
-      cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" },
-      cmake_build_options = { "-j32" },
       cmake_soft_link_compile_commands = false,
+      cmake_regenerate_on_save = false,
+      cmake_virtual_text_support = false,
       cmake_dap_configuration = { -- debug settings for cmake
         name = "cpp",
         type = "cppdbg",
@@ -63,15 +62,13 @@ return {
           quickfix = {
             show = "always", -- "always", "only_on_error"
             position = "belowright", -- "bottom", "top"
-            size = 20,
             auto_close_when_success = false,
           },
         },
       },
       cmake_notifications = {
-        enabled = false, -- show cmake execution progress in nvim-notify
-        spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }, -- icons used for progress display
-        refresh_rate_ms = 100, -- how often to iterate icons
+        runner = { enabled = false },
+        executor = { enabled = false },
       },
     },
   },

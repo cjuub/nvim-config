@@ -44,9 +44,20 @@ map({ "n" }, "<S-j>", "<Nop>")
 -- Refresh UI if too many graphical glitches
 map({ "n" }, "<C-p>", "<cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><cr>")
 
+local function toggle_quickfix()
+  local windows = vim.fn.getwininfo()
+  for _, win in pairs(windows) do
+    if win["quickfix"] == 1 then
+      vim.cmd.cclose()
+      return
+    end
+  end
+  vim.cmd.copen()
+end
+
 -- Quick toggle/removal of quickfix/Trouble
 map({ "n" }, "<A-F>", "<cmd>TroubleToggle<cr>")
-map({ "n" }, "<A-D>", "<cmd>cclose<cr>")
+map({ "n" }, "<A-D>", toggle_quickfix)
 
 -- Full root directory search for anything
 map({ "n" }, "<C-A-f>", function()
