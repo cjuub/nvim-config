@@ -26,8 +26,8 @@ return {
       },
       {
         ft = "qf",
-        title = "QuickFix",
-        size = { height = 0.4 },
+        title = "CMake",
+        size = { height = 0.6 },
       },
       {
         ft = "help",
