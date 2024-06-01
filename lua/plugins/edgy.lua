@@ -19,7 +19,7 @@ return {
       {
         ft = "lazyterm",
         title = "LazyTerm",
-        size = { height = 0.4 },
+        size = { height = 0.6 },
         filter = function(buf)
           return not vim.b[buf].lazyterm_cmd
         end,
