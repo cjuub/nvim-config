@@ -6,6 +6,13 @@ return {
     vim.opt.splitkeep = "screen"
   end,
   opts = {
+    right = {
+      {
+        ft = "copilot-chat",
+        title = "Copilot Chat",
+        size = { width = 100 },
+      },
+    },
     bottom = {
       -- toggleterm / lazyterm at the bottom with a height of 40% of the screen
       {
