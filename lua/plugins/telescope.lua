@@ -18,7 +18,7 @@ return {
         require("telescope.builtin").git_bcommits,
         desc = "Commits (current file)",
       },
-      { "<leader>/", Util.telescope("live_grep", { cwd = vim.fn.getcwd() }), desc = "Find in Files" },
+      { "<leader>/", Util.pick("live_grep", { cwd = vim.fn.getcwd() }), desc = "Find in Files" },
       {
         "<leader><space>",
         function()
