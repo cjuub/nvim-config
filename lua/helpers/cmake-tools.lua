@@ -71,15 +71,18 @@ return {
     return file_exists("CMakeLists.txt")
   end,
   configure = function()
-    require("trouble").close()
     require("cmake-tools").generate({}, function() end)
   end,
   build = function()
-    require("trouble").close()
     require("cmake-tools").quick_build({ fargs = { require("cmake-tools").get_build_target() } })
   end,
+  run = function()
+    load_current_cmake_targets_to_dap(function(launch_target_config)
+      vim.cmd("cclose")
+      require("dap").run(launch_target_config)
+    end)
+  end,
   debug = function()
-    require("trouble").close()
     load_current_cmake_targets_to_dap(function(launch_target_config)
       vim.cmd("cclose")
       require("dap").run(launch_target_config)
@@ -92,14 +95,12 @@ return {
     require("cmake-tools").select_launch_target({}, {})
   end,
   select_configure_preset = function()
-    require("trouble").close()
     require("cmake-tools").select_configure_preset()
   end,
   select_build_preset = function()
     require("cmake-tools").select_build_preset()
   end,
   select_presets = function()
-    require("trouble").close()
     require("cmake-tools").select_configure_preset(function()
       require("cmake-tools").select_build_preset()
     end)

@@ -17,11 +17,6 @@ return {
           desc = "Select build target",
         },
         {
-          "<F3>",
-          require("helpers.cmake-tools").select_launch_target,
-          desc = "Select launch target",
-        },
-        {
           "<F4>",
           require("helpers.cmake-tools").configure,
           desc = "Run CMake",
@@ -32,12 +27,30 @@ return {
           desc = "Build selected build target",
         },
         {
+          "<F7>",
+          require("helpers.cmake-tools").select_launch_target,
+          desc = "Select launch target",
+        },
+        {
+          "<F8>",
+          require("helpers.cmake-tools").run,
+          desc = "Run selected launch target",
+        },
+        {
           "<F9>",
-          require("helpers.cmake-tools").debug,
+          function()
+            require("dapui").open()
+            require("helpers.cmake-tools").debug()
+          end,
           desc = "Debug (start/continue)",
         },
         {
           "<F12>",
+          require("dapui").toggle,
+          desc = "Toggle DAP UI",
+        },
+        {
+          "<C-F12>",
           require("helpers.dap").close_debug_session,
           desc = "Debug (stop)",
         },
