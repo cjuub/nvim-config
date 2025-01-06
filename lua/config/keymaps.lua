@@ -17,32 +17,11 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
--- unmap unused defaults
-map({ "n" }, "<leader>ft", "")
-map({ "n" }, "<leader>fT", "")
-map({ "n" }, "<leader>fn", "")
-map({ "n" }, "<leader>`", "")
-map({ "n" }, "<leader>-", "")
-map({ "n" }, "<leader>|", "")
-map({ "n" }, "<leader>K", "")
-map({ "n" }, "<leader>L", "")
-
--- Remaps from LazyVim defaults
-map("n", "<c-/>", function()
-  Util.float_term()
-end, { desc = "Terminal (cwd)" })
-map("n", "<c-_>", function()
-  Util.float_term()
-end, { desc = "which_key_ignore" })
-
 -- Delete current buffer
 map({ "n" }, "<A-w>", "<cmd>bd<cr>")
 
 -- Nop out unused (by me) and often accidentally triggered keymap
 map({ "n" }, "<S-j>", "<Nop>")
-
--- Refresh UI if too many graphical glitches
-map({ "n" }, "<C-p>", "<cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><cr>")
 
 local function toggle_quickfix()
   local windows = vim.fn.getwininfo()
@@ -56,8 +35,8 @@ local function toggle_quickfix()
 end
 
 -- Quick toggle/removal of quickfix/Trouble
-map({ "n" }, "<A-F>", "<cmd>Trouble close<cr>")
-map({ "n" }, "<A-D>", toggle_quickfix)
+map({ "n" }, "<C-,>", "<cmd>Trouble close<cr>")
+map({ "n" }, "<C-.>", toggle_quickfix)
 
 -- Full root directory search for anything
 map({ "n" }, "<C-A-f>", function()

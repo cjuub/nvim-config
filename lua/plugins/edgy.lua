@@ -24,16 +24,16 @@ return {
         end,
       },
       {
-        ft = "lazyterm",
-        title = "LazyTerm",
+        ft = "snacks_terminal",
+        title = "Terminal",
         size = { height = 0.6 },
-        filter = function(buf)
-          return not vim.b[buf].lazyterm_cmd
+        filter = function(_buf, win)
+          return vim.w[win].snacks_win and vim.w[win].snacks_win.relative == "editor" and not vim.w[win].trouble_preview
         end,
       },
       {
         ft = "qf",
-        title = "CMake",
+        title = "Output",
         size = { height = 0.6 },
       },
       {
