@@ -35,8 +35,8 @@ local function toggle_quickfix()
 end
 
 -- Quick toggle/removal of quickfix/Trouble
-map({ "n" }, "<C-,>", "<cmd>Trouble close<cr>")
-map({ "n" }, "<C-.>", toggle_quickfix)
+map({ "n" }, "<A-F>", "<cmd>Trouble close<cr>")
+map({ "n" }, "<A-D>", toggle_quickfix)
 
 -- Full root directory search for anything
 map({ "n" }, "<C-A-f>", function()
